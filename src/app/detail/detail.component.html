@@ -1,0 +1,71 @@
+<div class="card m-3">
+    <h5 class="card-header">Billing System</h5>
+    <h6>Inserting Data</h6>
+    <div class="card-body">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Name</label>
+                    <select formControlName="itemName" class="form-control">
+                       
+                        <option>Lenovo</option>
+                        <option>Dell</option>
+                        <option>Acer</option>
+                        <option>Apple</option>
+
+                    </select>
+                    <span class="text-danger" *ngIf='f.itemName.invalid&&(f.itemName.touched ||submitted)'> name is
+                        mandatory</span>
+
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Price</label>
+                    <input type="number" class="form-control" formControlName="price" />
+                    <span class="text-danger" *ngIf='f.price.invalid&&(f.price.touched || submitted)'>Price is
+                        mandatory</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Quantity</label>
+                    <input type="number" class="form-control" formControlName="quantity" />
+                    <span class="text-danger" *ngIf='f.quantity.invalid&&(f.quantity.touched ||submitted)'> quantity is
+                        mandatory</span>
+                </div>
+            </div>
+            <input type="submit" class='btn btn-block btn-success' (click)="getItems()"><br>
+            <input type="button" value="clear" class='btn btn-block btn-primary' (click)="onReset()">
+            <input type="button" value="update" class='btn btn-block btn-primary' (click)="updatadata()">
+         
+           
+   
+        </form>
+    </div>
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>delete</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let x of itemsData,let i=index">
+            <td>{{i+1}}</td>
+            <!-- <td>{{x.itemId}}</td> -->
+            <td>{{x.itemName}}</td>
+            <td>{{x.price}}</td>
+            <td>{{x.quantity}}</td>
+            <td><a class="delete" title="Delete" (click)='delete(x.itemId)'data-toggle="tooltip"><i class="material-icons" style="color:red">&#xE872;</i></a></td>
+           <td>
+            <a class="edit" title="Edit" (click)='edit(x)' data-toggle="tooltip"><i class="material-icons"  style="color:blue;">&#xE254;</i></a> </td>
+
+        </tr>
+    </tbody>
+</table>
